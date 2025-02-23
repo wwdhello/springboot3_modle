@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: springboot3_modle
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/<baseName>
+    username: "root"
+    password: "041217"
+server:
+  port: 8088
