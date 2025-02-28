@@ -27,4 +27,11 @@ public class UserController {
         }
     }
 
+    @PostMapping("/login")
+    public Result<?> login(@Valid @RequestBody User user){
+        return userService.login(user);
+    }
+
+
+
 }

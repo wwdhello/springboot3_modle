@@ -1,5 +1,7 @@
 package com.wwdui.springboot3_modle.pojo;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Result<T> {
     private int code; // 状态码
     private String message; // 返回消息
