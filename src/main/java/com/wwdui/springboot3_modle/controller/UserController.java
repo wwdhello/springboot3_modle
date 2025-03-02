@@ -29,7 +29,21 @@ public class UserController {
 
     @PostMapping("/login")
     public Result<?> login(@Valid @RequestBody User user){
-        return userService.login(user);
+        try {
+            return userService.login(user);
+        }catch (RuntimeException e){
+            return Result.error(400, e.getMessage());
+        }
+
+    }
+
+    @PostMapping("/logout")
+    public Result<?> logout(){
+        try {
+            return userService.logout();
+        }catch (RuntimeException e){
+            return Result.error(400, e.getMessage());
+        }
     }
 
 

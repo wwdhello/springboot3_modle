@@ -9,4 +9,6 @@ public interface UserService {
     User registerUser(User user);
 
     Result<?> login(User user);
+
+    Result<?> logout();
 }
