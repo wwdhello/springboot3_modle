@@ -11,4 +11,6 @@ public interface UserService {
     Result<?> login(User user);
 
     Result<?> logout();
+
+    Result<?> getUser();
 }

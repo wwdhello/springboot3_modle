@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.wwdui.springboot3_modle.mapper.UserMapper;
 import com.wwdui.springboot3_modle.pojo.LoginUser;
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;

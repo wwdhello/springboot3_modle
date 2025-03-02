@@ -76,5 +76,21 @@ public class UserServiceImpl implements UserService {
         return  Result.success();
     }
 
+    @Override
+    public Result<?> getUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        Long userid = loginUser.getUser().getId();
+        String name=loginUser.getUser().getName();
+        String username = loginUser.getUser().getUsername();
+        HashMap<String,Object> map = new HashMap<>();
+        map.put("userid",userid);
+        map.put("username",username);
+        map.put("name",name);
+        return Result.success(map);
+    }
+
+
+
 
 }
