@@ -34,6 +34,8 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RedisCache redisCache;
+
+    //注册
     @Override
     public User registerUser(User user) {
         QueryWrapper<User> queryWrapper=new QueryWrapper<>();
@@ -48,6 +50,7 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    //登录
     @Override
     public Result<?> login(User user) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUsername(),user.getPassword());
@@ -67,6 +70,7 @@ public class UserServiceImpl implements UserService {
         return Result.success(map);
     }
 
+    //登出
     @Override
     public Result<?> logout() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -76,19 +80,23 @@ public class UserServiceImpl implements UserService {
         return  Result.success();
     }
 
+    //信息
     @Override
     public Result<?> getUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
         Long userid = loginUser.getUser().getId();
+        String email=loginUser.getUser().getEmail();
         String name=loginUser.getUser().getName();
         String username = loginUser.getUser().getUsername();
         HashMap<String,Object> map = new HashMap<>();
         map.put("userid",userid);
         map.put("username",username);
         map.put("name",name);
+        map.put("email",email);
         return Result.success(map);
     }
+
 
 
 

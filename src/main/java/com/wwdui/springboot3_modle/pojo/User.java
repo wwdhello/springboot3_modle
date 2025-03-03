@@ -2,6 +2,7 @@ package com.wwdui.springboot3_modle.pojo;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -31,4 +32,7 @@ public class User implements Serializable {
 
 
     private String name;      // 姓名
+
+    @Email
+    private String email;
 }
