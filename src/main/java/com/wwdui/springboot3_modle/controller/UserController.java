@@ -62,6 +62,8 @@ public class UserController {
         }
     }
 
+    //发送验证码
+    //TODO 后续可以扩展找回密码和绑定邮箱功能
     @PostMapping("/sendcode")
     public Result<?> sendCode(@Valid @RequestBody VerifyCodeRequest verifyCodeRequest){
         try {
@@ -73,6 +75,8 @@ public class UserController {
         }
     }
 
+    //比对验证码
+    //TODO 后续可以扩展找回密码和绑定邮箱功能
     @PostMapping("/verifycode")
     public Result<?> verifyCode(@Valid @RequestBody VerifyCodeRequest verifyCodeRequest){
         boolean isValid = verificationCodeService.verifyCode(verifyCodeRequest.getEmail(), verifyCodeRequest.getCode());

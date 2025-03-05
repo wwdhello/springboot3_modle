@@ -20,7 +20,7 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
     @Override
     public String generateAndStoreCode(String email) {
         String code = String.valueOf((int) (Math.random() * 900000) + 100000); // 生成6位验证码
-        redisTemplate.opsForValue().set(email, code, 5, TimeUnit.MINUTES); // 存储到Redis，5分钟过期
+        redisTemplate.opsForValue().set(email, code, 3, TimeUnit.MINUTES); // 存储到Redis，5分钟过期
         return code;
     }
 
