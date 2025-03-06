@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Transactional
 @Service
@@ -39,7 +40,7 @@ public class FileServiceImpl implements FileService {
                 .eq("md5",md5));
         if (fileEntity!=null){
             //存入redis
-            redisTemplate.opsForValue().set("file:md5:" + md5, fileEntity.getFilePath());
+            redisTemplate.opsForValue().set("file:md5:" + md5, fileEntity.getFilePath(),1, TimeUnit.HOURS);
             return fileEntity.getFilePath();
         }
         return null;
