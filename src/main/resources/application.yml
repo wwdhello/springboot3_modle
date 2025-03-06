@@ -53,4 +53,9 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl # 打印 SQL 日志
     cache-enabled: false # 关闭二级缓存（默认关闭）
 
+#分页参数
+pagehelper:
+  helper-dialect: mysql # 数据库方言
+  reasonable: true # 分页参数合理化
+  support-methods-arguments: true # 支持通过 Mapper 接口参数传递分页参数
 

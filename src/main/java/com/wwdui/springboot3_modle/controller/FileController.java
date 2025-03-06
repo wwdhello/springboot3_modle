@@ -1,6 +1,9 @@
 package com.wwdui.springboot3_modle.controller;
 
+import com.github.pagehelper.PageInfo;
+import com.wwdui.springboot3_modle.pojo.FileEntity;
 import com.wwdui.springboot3_modle.pojo.FileRequest;
+import com.wwdui.springboot3_modle.pojo.PageRequest;
 import com.wwdui.springboot3_modle.pojo.Result;
 import com.wwdui.springboot3_modle.service.FileService;
 import jakarta.validation.Valid;
@@ -40,6 +43,16 @@ public class FileController {
             }else {
                 return Result.error(400,"上传失败");
             }
+        }catch (RuntimeException e){
+            return Result.error(400, e.getMessage());
+        }
+    }
+
+    @PostMapping("/list")
+    public Result<?> listFilePathsByUserId(@Valid @RequestBody PageRequest pageRequest){
+        try {
+            PageInfo<FileEntity> pageInfo=fileService.listFilePathsByUserId(pageRequest.getPageNum(), pageRequest.getPageSize());
+            return Result.success(pageInfo);
         }catch (RuntimeException e){
             return Result.error(400, e.getMessage());
         }

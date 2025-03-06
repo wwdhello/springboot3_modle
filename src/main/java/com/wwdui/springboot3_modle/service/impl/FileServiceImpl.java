@@ -1,6 +1,9 @@
 package com.wwdui.springboot3_modle.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wwdui.springboot3_modle.mapper.FileMapper;
 import com.wwdui.springboot3_modle.pojo.FileEntity;
 import com.wwdui.springboot3_modle.pojo.LoginUser;
@@ -57,6 +60,25 @@ public class FileServiceImpl implements FileService {
             mergeChunks(md5,totalChunks,userId);
         }
         return true;
+    }
+
+
+    @Override
+    public PageInfo<FileEntity> listFilePathsByUserId( Integer pageNum, Integer pageSize) {
+
+        //获取用户id
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !(authentication.getPrincipal() instanceof LoginUser)) {
+            throw new RuntimeException("用户未登录或登录信息无效");
+        }
+        LoginUser loginUser = (LoginUser) authentication.getPrincipal();
+        long userId=loginUser.getUser().getId();
+        // 使用 PageHelper 分页
+        PageHelper.startPage(pageNum, pageSize);
+        // 查询数据
+        Page<FileEntity> page = fileMapper.selectFilePathsByUserId(userId);
+        // 返回分页结果
+        return new PageInfo<>(page);
     }
 
     private void mergeChunks(String md5, int totalChunks, long userId) {
