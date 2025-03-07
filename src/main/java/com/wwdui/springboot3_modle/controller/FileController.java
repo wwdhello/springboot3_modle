@@ -16,6 +16,7 @@ public class FileController {
     @Autowired
     private FileService fileService;
 
+    //秒传
     @PostMapping ("/check")
     public Result<?> checkFileExists(@Valid @RequestBody FileRequest fileRequest){
 
