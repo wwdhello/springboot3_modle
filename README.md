@@ -9,6 +9,7 @@
 - 规则推荐 utf8mb4_unicode_ci
 - PostMan 请求为application/json
 ## 基本结构↓
+```
 springboot3_model/
 ├── .idea/
 ├── .mvn/
@@ -55,7 +56,7 @@ springboot3_model/
 │       └── java/
 │           └── com.wwdui.springboot3_model/
 └── target/
-
+```
 ---
 
 # 2.登录相关功能
