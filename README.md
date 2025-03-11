@@ -17,18 +17,22 @@ springboot3_model/
 │   ├── main/
 │   │   ├── java/
 │   │   │   └── com.wwdui.springboot3_model/
+│   │   │       ├── Springboot3ModelApplication.java
 │   │   │       ├── config/
 │   │   │       │   ├── FastJsonRedisSerializer.java
 │   │   │       │   ├── JwtAuthenticationTokenFilter.java
 │   │   │       │   ├── RedisConfig.java
 │   │   │       │   └── SecurityConfig.java
 │   │   │       ├── controller/
+|   |   |       |   ├── AdminController.java
 │   │   │       │   ├── FileController.java
 │   │   │       │   └── UserController.java
 │   │   │       ├── mapper/
+│   │   │       │   ├── MenuMapper.java
 │   │   │       │   ├── FileMapper.java
 │   │   │       │   └── UserMapper.java
 │   │   │       ├── pojo/
+│   │   │       │   ├── Menu.java
 │   │   │       │   ├── FileEntity.java
 │   │   │       │   ├── FileRequest.java
 │   │   │       │   ├── LoginUser.java
@@ -46,11 +50,10 @@ springboot3_model/
 │   │   │           ├── JwtUtil.java
 │   │   │           ├── RedisCache.java
 │   │   │           ├── WebUtils.java
-│   │   │           └── Springboot3ModelApplication.java
 │   │   └── resources/
 │   │       ├── mapper/
-│   │       │   ├── FileMapper.xml
-│   │       │   └── UserMapper.xml
+│   │       │   ├── MenuMapper.xml
+│   │       │   └── FileMapper.xml
 │   │       └── application.yml
 │   └── test/
 │       └── java/
@@ -127,6 +130,9 @@ springboot3_model/
 
 # 4.后续
 ## 这里将会对之前的一些不足进行优化  
+### 2025.3.9 更新了基于RBAC权限模型的授权  
+ **加入了Menu权限表和role角色表**  
+ **项目结构图已更新**
 
  
 
