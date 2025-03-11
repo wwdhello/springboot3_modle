@@ -29,4 +29,26 @@ public class RedisConfig {
         template.afterPropertiesSet();
         return template;
     }
+
+
+    @Bean
+    public RedisTemplate<String, Integer> redisTemplateForInteger(RedisConnectionFactory connectionFactory) {
+        RedisTemplate<String, Integer> template = new RedisTemplate<>();
+        template.setConnectionFactory(connectionFactory);
+
+        // 使用 FastJsonRedisSerializer 作为值的序列化器
+        FastJsonRedisSerializer<Integer> serializer = new FastJsonRedisSerializer<>(Integer.class);
+
+        // 使用 StringRedisSerializer 来序列化和反序列化 redis 的 key 值
+        template.setKeySerializer(new StringRedisSerializer());
+        template.setValueSerializer(serializer);
+
+        // Hash 的 key 也采用 StringRedisSerializer 的序列化方式
+        template.setHashKeySerializer(new StringRedisSerializer());
+        template.setHashValueSerializer(serializer);
+
+        template.afterPropertiesSet();
+        return template;
+    }
+
 }
