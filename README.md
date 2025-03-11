@@ -1,5 +1,5 @@
 # 1.简介
-本项目基于springboot+mybatisplus，集成了一般的springboot项目使用的基本功能*增删改查，上传文件，邮箱验证等*,项目只进行的接口的实现保证其有一定的可扩展性
+本项目基于springboot+mybatisplus，集成了一般的springboot项目使用的基本功能*增删改查，上传文件，邮箱验证等*,同时包含一些redis的应用,项目只进行的接口的实现保证其有一定的可扩展性
 ## 环境
 - Windows11
 - springboot:3.4.3
@@ -19,19 +19,24 @@ springboot3_model/
 │   │   │   └── com.wwdui.springboot3_model/
 │   │   │       ├── Springboot3ModelApplication.java
 │   │   │       ├── config/
+│   │   │       │   ├── RedissonConfig.java
 │   │   │       │   ├── FastJsonRedisSerializer.java
 │   │   │       │   ├── JwtAuthenticationTokenFilter.java
 │   │   │       │   ├── RedisConfig.java
 │   │   │       │   └── SecurityConfig.java
 │   │   │       ├── controller/
+│   │   │       │   ├── GoodController.java
 |   |   |       |   ├── AdminController.java
 │   │   │       │   ├── FileController.java
 │   │   │       │   └── UserController.java
 │   │   │       ├── mapper/
+│   │   │       │   ├── GoodMapper.java
 │   │   │       │   ├── MenuMapper.java
 │   │   │       │   ├── FileMapper.java
 │   │   │       │   └── UserMapper.java
 │   │   │       ├── pojo/
+│   │   │       │   ├── Good.java
+│   │   │       │   ├── GoodRequest.java
 │   │   │       │   ├── Menu.java
 │   │   │       │   ├── FileEntity.java
 │   │   │       │   ├── FileRequest.java
@@ -42,14 +47,19 @@ springboot3_model/
 │   │   │       │   └── VerifyCodeRequest.java
 │   │   │       ├── service/
 │   │   │       │   └── impl/
-│   │   │       │       ├── FileServiceImpl.java
-│   │   │       │       ├── SthServiceImpl.java
-│   │   │       │       ├── UserServiceImpl.java
-│   │   │       │       └── VerificationCodeServiceImpl.java
+│   │   │       │   |    ├── GoodServiceImpl.java
+│   │   │       │   |    ├── FileServiceImpl.java
+│   │   │       │   |    ├── SthServiceImpl.java
+│   │   │       │   |    ├── UserServiceImpl.java
+│   │   │       │   |    └── VerificationCodeServiceImpl.java
+│   │   │       │   ├── FileService.java
+│   │   │       │   ├── GoodService.java
+│   │   │       │   ├── UserService.java
+│   │   │       │   └── VerificationCodeService.java
 │   │   │       └── util/
 │   │   │           ├── JwtUtil.java
 │   │   │           ├── RedisCache.java
-│   │   │           ├── WebUtils.java
+│   │   │           └── WebUtils.java
 │   │   └── resources/
 │   │       ├── mapper/
 │   │       │   ├── MenuMapper.xml
@@ -132,6 +142,12 @@ springboot3_model/
 ## 这里将会对之前的一些不足进行优化  
 ### 2025.3.9 更新了基于RBAC权限模型的授权  
  **加入了Menu权限表和role角色表**  
+ **项目结构图已更新**  
+ 
+ ---
+ 
+### 2025.3.11 更新了redisson分布式锁的应用  
+ **加入了good商品表和user_good操作记录表**:为了实现分布式锁的应用,加入了需要高并发的操作如'商品的购买'    
  **项目结构图已更新**
 
  
