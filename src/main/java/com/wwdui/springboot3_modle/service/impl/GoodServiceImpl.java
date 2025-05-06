@@ -1,6 +1,7 @@
 package com.wwdui.springboot3_modle.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.wwdui.springboot3_modle.config.GoodElasticsearchRepository;
 import com.wwdui.springboot3_modle.mapper.GoodMapper;
 import com.wwdui.springboot3_modle.mapper.UserGoodMapper;
 import com.wwdui.springboot3_modle.pojo.Good;
@@ -19,6 +20,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -32,6 +34,8 @@ public class GoodServiceImpl implements GoodService {
     private RedisTemplate<String, Integer> redisTemplate;
     @Autowired
     private RedissonClient redissonClient;
+    @Autowired
+    private GoodElasticsearchRepository goodElasticsearchRepository;
     @Override
     @Transactional
     public Result<?> buyGoodById(long goodId, int buyNum) {
@@ -71,6 +75,10 @@ public class GoodServiceImpl implements GoodService {
             good.setGoodNum(good.getGoodNum() - buyNum);
             goodMapper.updateById(good);
 
+            //同步数据到Elasticsearch
+            goodElasticsearchRepository.save(good);
+
+            //原子性地对键的值进行操作
             ops.decrement("good:stock:" + goodId, buyNum);
 
             recordUserGood(userid, goodId, buyNum);
@@ -85,6 +93,11 @@ public class GoodServiceImpl implements GoodService {
                 lock.unlock();
             }
         }
+    }
+
+    @Override
+    public List<Good> searchProducts(String query) {
+        return goodElasticsearchRepository.findByGoodName(query);
     }
 
     /**
