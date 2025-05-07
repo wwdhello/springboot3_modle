@@ -16,6 +16,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.rmi.RemoteException;
 import java.util.Objects;
 @Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
@@ -46,6 +47,9 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         LoginUser loginUser = redisCache.getCacheObject(redisKey);
         if(Objects.isNull(loginUser)){
             throw new RuntimeException("用户未登录");
+        }
+        if (!loginUser.getToken().equals(token)){
+            throw new RemoteException("请重新登录");
         }
         //存入SecurityContextHolder
         //获取权限信息封装到Authentication中

@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class LoginUser implements UserDetails {
     private User user;
+    private String token;
     //存储权限信息
     private List<String> permissions;
 

@@ -63,11 +63,14 @@ public class UserServiceImpl implements UserService {
         LoginUser loginUser = (LoginUser) authenticate.getPrincipal();
         String userId = loginUser.getUser().getId().toString();
         String jwt = JwtUtil.createJWT(userId);
+        loginUser.setToken(jwt);
         //authenticate存入redis
         redisCache.setCacheObject("login:"+userId,loginUser,1, TimeUnit.HOURS);
         //把token响应给前端
         HashMap<String,String> map = new HashMap<>();
         map.put("token",jwt);
+
+        System.out.println(loginUser);
         return Result.success(map);
     }
 
